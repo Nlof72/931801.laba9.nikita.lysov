@@ -6,6 +6,7 @@ viv = document.querySelector('#field');
 vtorviv = document.querySelector('#vvod')
 vtorviv.value = 0;
 
+check0 = true;
 Clik = (event) => {
     content = event.target.textContent;
     switch (content) {
@@ -17,8 +18,7 @@ Clik = (event) => {
                 a = '';
                 b += ' ';
                 break;
-            }
-            else break;
+            } else break;
         case '*':
             if (znak) {
                 a = mnog(a);
@@ -27,8 +27,7 @@ Clik = (event) => {
                 a = '';
                 b += ' ';
                 break;
-            }
-            else break;
+            } else break;
         case '+':
             if (znak) {
                 a = sum(a);
@@ -37,8 +36,7 @@ Clik = (event) => {
                 a = '';
                 b += ' ';
                 break;
-            }
-            else break;
+            } else break;
         case '-':
             if (znak) {
                 a = minus(a);
@@ -47,8 +45,7 @@ Clik = (event) => {
                 a = '';
                 b += ' ';
                 break;
-            }
-            else break;
+            } else break;
         case 'C':
             a = clear(a);
             vtorviv.value = a;
@@ -64,7 +61,7 @@ Clik = (event) => {
             a = calc(a);
             vtorviv.value = a;
             viv.value = '';
-            b = '';
+            b = a;
             a = '';
             break;
         case '.':
@@ -74,9 +71,15 @@ Clik = (event) => {
             break;
         default:
             znak = true;
-            a += event.target.textContent;
-            viv.value = b + a;
-            vtorviv.value = a;
+            a += content;
+            if (a[0] === '0') {
+                a = a.slice(1, a.length);
+                viv.value = '0';
+                vtorviv.value = '0';
+            } else {
+                viv.value = b + a;
+                vtorviv.value = a;
+            }
     }
 };
 
@@ -97,7 +100,7 @@ clear = (a) => {
 }
 
 remElem = (a) => {
-    
+
     if (!a == '') {
         console.log(1);
         a = a.substr(0, a.length - 1);
@@ -117,8 +120,7 @@ dot = (a) => {
         a += '.';
         c = false;
         return a;
-    }
-    else return a;
+    } else return a;
 }
 
 mnog = (a) => {
